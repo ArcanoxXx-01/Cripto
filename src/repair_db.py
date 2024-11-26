@@ -1,18 +1,18 @@
 import os
-import pandas as pd
+import pandas as pd # type: ignore
 
 
 # Configuración: directorio donde están los archivos CSV
-DIRECTORIO_CSV = os.path.join(os.path.dirname(__file__), "db")
+DIRECTORIO_CSV = "./db"
 COLUMNAS_A_ELIMINAR = ['unix', 'symbol']
 
-def repair():
+def repair( delete_first_row = 0 ):
     """
     Procesa todos los archivos CSV en el directorio configurado ( /db ):
     1. Elimina las columnas 'unix' y 'symbol'  (si existen).
-    2. Cambia el nombre de la última columna a 'Volume Cripto' (si no existe)
-    3. Agrega una nueva columna 'volatility', calculada como (high - low) / open.  (si no existe)
-    4. Agrega una nueva columna 'average' , calculada como Volume USD / Volume Cripto.  (si no existe)
+    2. Cambia el nombre de la última columna a 'Volume Cripto' (si no existe).
+    3. Agrega una nueva columna 'volatility', calculada como (high - low) / open.  (si no existe).
+    4. Agrega una nueva columna 'average' , calculada como Volume USD / Volume Cripto.  (si no existe).
     """
     if not os.path.isdir(DIRECTORIO_CSV):
         print(f"El directorio '{DIRECTORIO_CSV}' no existe. Por favor, crea un directorio llamado 'db' y agrega los archivos CSV.")
@@ -23,7 +23,7 @@ def repair():
             ruta_archivo = os.path.join(DIRECTORIO_CSV, archivo)
             try:
                 # Leer el archivo CSV
-                df = pd.read_csv(ruta_archivo)
+                df = pd.read_csv(ruta_archivo, skiprows = delete_first_row)
                 
                 # Eliminar las columnas especificadas si existen
                 df = df.drop(columns=[col for col in COLUMNAS_A_ELIMINAR if col in df.columns], errors='ignore')
@@ -49,4 +49,4 @@ def repair():
 
 # # Llamar automáticamente a la función al importar el script
 # if __name__ == "__main__":
-#     repair()
+repair()

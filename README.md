@@ -40,6 +40,9 @@ Cripto/
 │   ├── distribucion_volatilidad.png
 │   └── reporte_resumen.pdf
 │
+├── 📂 .kaggle/                # Obtener en la pagina oficial de  Kaggle una credencial ( kaggle.json ) y 
+│   └── kaggle.json            # copiarlo dentro de .kaggle/ para automatizar la descarga del dataset.
+│
 ├── README.md
 └── requirements.txt
 ```
@@ -57,7 +60,7 @@ pip install -r requirements.txt
 
 ---
 ## 🛠️ **Funcionalidades Implementadas**
- 
+<!--  
 1. Análisis Exploratorio de Datos (EDA):
 
     Visualización de distribuciones de precios (histogramas y KDE).
@@ -78,7 +81,7 @@ pip install -r requirements.txt
 4. Compresión y Resumen del Mercado:
 
     Reducción de dimensionalidad usando PCA.
-    Clustering jerárquico y K-means para agrupar criptomonedas similares.
+    Clustering jerárquico y K-means para agrupar criptomonedas similares. -->
 
 ---
 ## 📊 **Ejemplos de Visualizaciones**
@@ -89,10 +92,10 @@ pip install -r requirements.txt
 
 ---
 ## 🚀 **Próximos Pasos**
-
+<!-- 
     Implementar simulaciones de Monte Carlo para análisis de riesgo.
     Desarrollar un sistema de visualización interactiva para análisis avanzado.
-    Explorar modelos avanzados de predicción como redes neuronales recurrentes (RNN).
+    Explorar modelos avanzados de predicción como redes neuronales recurrentes (RNN). -->
 
 ---
 ## 🤝 **Desarrolladores**

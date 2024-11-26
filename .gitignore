@@ -1,3 +1,6 @@
+.gitgnore
+env
 db
 distribucion.py
 mian.py
+kaggle.json
