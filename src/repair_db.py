@@ -23,23 +23,24 @@ def repair( delete_first_row = 0 ):
             ruta_archivo = os.path.join(DIRECTORIO_CSV, archivo)
             try:
                 # Leer el archivo CSV
-                df = pd.read_csv(ruta_archivo, skiprows = delete_first_row)
-                
+                df = pd.read_csv(ruta_archivo, skiprows = 1)
+                 # Normalizar los nombres de las columnas
+                df.columns = df.columns.str.strip().str.lower()
                 # Eliminar las columnas especificadas si existen
                 df = df.drop(columns=[col for col in COLUMNAS_A_ELIMINAR if col in df.columns], errors='ignore')
                 
                 # Cambiar el nombre de la última columna a "Volume Cripto"
-                if len(df.columns) > 0 and not {'Volume Cripto'}.issubset(df.columns):  # Verificar que haya columnas  
+                if len(df.columns) > 0 and not {'volume cripto'}.issubset(df.columns):  # Verificar que haya columnas  
                     ultima_columna = df.columns[-1]
-                    df.rename(columns={ultima_columna: "Volume Cripto"}, inplace=True)
+                    df.rename(columns={ultima_columna: "volume cripto"}, inplace=True)
                 
                 # Agregar la nueva columna 'volatility'
                 if {'high', 'low', 'open'}.issubset(df.columns) and not {'volatility'}.issubset(df.columns):
                     df.insert(5,"volatility",(df['high'] - df['low']) / df['open'])
 
                 # Agregar la nueva columna 'average'
-                if {'Volume USD', 'Volume Cripto'}.issubset(df.columns) and not {'average'}.issubset(df.columns):
-                    df.insert(6,"average",df['Volume USD'] / df['Volume Cripto'])
+                if {'volume usd', 'volume cripto'}.issubset(df.columns) and not {'average'}.issubset(df.columns):
+                    df.insert(6,"average",df['volume usd'] / df['volume cripto'])
 
                 # Guardar el archivo actualizado
                 df.to_csv(ruta_archivo, index=False)
