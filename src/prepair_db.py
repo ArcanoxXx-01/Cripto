@@ -1,7 +1,6 @@
 import os
 import pandas as pd # type: ignore
 
-
 # Configuración: directorio donde están los archivos CSV
 DIRECTORIO_CSV = "./db"
 COLUMNAS_A_ELIMINAR = ['unix', 'symbol']
@@ -49,5 +48,4 @@ def repair( delete_first_row = 0 ):
                 print(f"Error procesando {archivo}: {e}")
 
 # # Llamar automáticamente a la función al importar el script
-# if __name__ == "__main__":
 repair()
